@@ -1,6 +1,8 @@
 Joxy - A simple Proxy Server
 ===
 
+[![Build Status](https://travis-ci.org/shaneutt/joxy.svg?branch=master)](https://travis-ci.org/shaneutt/joxy.svg?branch=master)
+
 Joxy is a proxy server that does simple round-robin style HTTP proxy routes
 for simple, quick proxying.
 
