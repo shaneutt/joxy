@@ -1,4 +1,4 @@
-GRADLE    := gradle
+GRADLE    := `pwd`/gradlew
 SCRIPTDIR := `pwd`/script
 LIBDIR    := `pwd`/build/libs
 BINDIR    := `pwd`/build/bin
