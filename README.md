@@ -16,7 +16,7 @@ Currently only tested on Linux, but should work on any Unix/Unixlike with:
 
     * bash
     * uuencode/uudecode
-    * gradle
+    * Java 7 or 8
 
 Usage
 ---
