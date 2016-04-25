@@ -1,8 +1,8 @@
 package com.shaneutt.joxy;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.net.InetSocketAddress;
 
 /**
  * RoundRobinRouter is a simple router for InetSocketAddress addresses via
@@ -98,7 +98,7 @@ public class RoundRobinRouter implements Router {
    */
   public synchronized InetSocketAddress get() {
     index++;
-    if (index + 1 > routeList.size())
+    if (index > routeList.size() - 1)
       index = 0;
     return routeList.get(index);
   }

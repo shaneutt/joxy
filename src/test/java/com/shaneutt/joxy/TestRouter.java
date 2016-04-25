@@ -1,12 +1,10 @@
 package com.shaneutt.joxy;
 
-import java.util.ArrayList;
 import java.net.InetSocketAddress;
-
-// testing imports
+import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.*;
 
 public class TestRouter {
 	@Test
