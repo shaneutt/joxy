@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -f joxy.jar
 uudecode $0
-java -classpath joxy.jar com.shaneutt.joxy.ProxyServer
+java -classpath joxy.jar com.shaneutt.joxy.Server
 rm -rf joxy.jar
 exit 0
