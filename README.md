@@ -16,18 +16,24 @@ Currently only tested on Linux, but should work on any Unix/Unixlike with:
 
     * bash
     * uuencode/uudecode
-    * gradle
+    * Java 7 or 8
 
 Usage
 ---
 
-You can build an executable copy of Joxy with the following command
+If you want to just run the proxy server and start testing it from the git repo:
+
+```shell
+make run
+```
+
+You can also build an executable copy of Joxy with the following command
 
 ```shell
 make bin
 ```
 
-This will produce the entire application as a bash script in `build/bin/joxy`.
+This will produce the entire application as a bash script in `build/bin/joxy` which should be portable.
 
 Building
 ---
