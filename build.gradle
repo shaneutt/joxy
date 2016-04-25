@@ -6,6 +6,7 @@ apply plugin: 'java'
 
 dependencies {
     testCompile 'junit:junit:4.12'
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.17'
 }
 
 sourceSets {
