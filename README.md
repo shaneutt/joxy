@@ -50,6 +50,12 @@ Running the tests:
 make test
 ```
 
+Running the tests with grade `--info`:
+
+```shell
+make test-info
+```
+
 Building a JAR:
 
 ```shell

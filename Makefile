@@ -31,4 +31,7 @@ run: bin
 test:
 	@$(GRADLE) test
 
+test-info:
+	@$(GRADLE) test --info
+
 .PHONY: bin clean compile jar run test
