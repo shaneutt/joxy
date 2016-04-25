@@ -1,13 +1,15 @@
-Joxy - A simple Proxy Server
+Joxy - A simple load balancer and proxy server
 ===
 
 [![Build Status](https://travis-ci.org/shaneutt/joxy.svg?branch=master)](https://travis-ci.org/shaneutt/joxy.svg?branch=master)
 
-Joxy is a proxy server that does simple round-robin style HTTP proxy routes
-for simple, quick proxying.
+Joxy is a load balancer and proxy server with configurable routes.
 
 Routes are configured in a configuration file, along with backends that are
 provided for that route.
+
+Routes configured in the config file can have different routing policies and
+act independently of one another.
 
 Requirements
 ---
@@ -73,3 +75,4 @@ About
 
 I started writing this application to learn Java8. I would not advise using this
 in production.
+
