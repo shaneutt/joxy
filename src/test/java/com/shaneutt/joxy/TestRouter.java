@@ -8,9 +8,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-public class TestRoundRobinRouter {
+public class TestRouter {
 	@Test
-	public void testUnimplemented() {
+	public void testRoundRobinRouter() {
     RoundRobinRouter router = new RoundRobinRouter();
 
 		// make sure we have a proper RoundRobinRouter
