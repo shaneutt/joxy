@@ -37,6 +37,48 @@ make bin
 
 This will produce the entire application as a bash script in `build/bin/joxy` which should be portable.
 
+Configuring
+---
+
+Joxy uses a YAML configuration file for the server, and for its services and routes:
+
+```yaml
+server:
+    address: 127.0.0.1
+    port:    8080
+routes:
+    - name: testservice1
+      path: /testing/
+      routes:
+          - address: 127.0.0.1
+            port:    8081
+          - address: 127.0.0.1
+            port:    8082
+    - name: testservice2
+      path: /testing2/
+      routes:
+          - address: 127.0.0.1
+            port:    8083
+          - address: 127.0.0.1
+            port:    8084
+```
+
+The config above configures the Joxy server to listen on `127.0.0.1:8000` and has two services it's forwarding for.
+
+Requests that match `/testing/` will all be forwarded to the routes defined for `testservice1`:
+
+```yaml
+routes:
+    - address: 127.0.0.1
+      port:    8081
+    - address: 127.0.0.1
+      port:    8082
+```
+
+These will be provided via the round-robin routing technique (by default, other policies are not yet implemented).
+
+Similarly requests to `/testing2/` will be forwarded to the routes defined for `testservice2`.
+
 Building
 ---
 
