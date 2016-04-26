@@ -5,8 +5,7 @@ BINDIR    := `pwd`/build/bin
 
 all: test bin
 
-bin:
-	@$(GRADLE) jar
+bin: jar
 	@rm -f $(SCRIPTDIR)/joxy
 	@cat $(SCRIPTDIR)/joxy.script.template > $(SCRIPTDIR)/joxy.sh
 	@uuencode $(LIBDIR)/joxy.jar joxy.jar >> $(SCRIPTDIR)/joxy.sh
@@ -22,7 +21,7 @@ compile:
 	@$(GRADLE) build
 
 jar:
-	@$(GRADLE) jar
+	@$(GRADLE) jar_with_deps
 
 run: bin
 	@echo ''

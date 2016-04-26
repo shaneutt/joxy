@@ -7,7 +7,7 @@ public class Server {
   public static void main(String[] args) throws Exception {
 		// set up the server, get the server config
 		System.out.println("Starting Joxy Server...");
-		Config config = new Config("FIXME");
+		Config config = new Config("script/joxy-test-config.yml");
 
 		// set up address and server
 		InetSocketAddress address = new InetSocketAddress(config.serverAddress, config.serverPort);

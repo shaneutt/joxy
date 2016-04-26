@@ -1,12 +1,12 @@
+apply plugin: 'java'
+
 repositories {
     mavenCentral()
 }
 
-apply plugin: 'java'
-
 dependencies {
     testCompile 'junit:junit:4.12'
-    compile group: 'org.yaml', name: 'snakeyaml', version: '1.17'
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.16'
 }
 
 sourceSets {
@@ -19,4 +19,9 @@ sourceSets {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'
+}
+
+task jar_with_deps(type: Jar) {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
