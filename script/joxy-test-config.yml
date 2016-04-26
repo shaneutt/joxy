@@ -2,12 +2,17 @@ server:
     address: 127.0.0.1
     port:    8080
 routes:
-    - testservice1:
-        path: /testing/
-        routes:
-            - route:
-                address: 127.0.0.1
-                port:    8081
-            - route:
-                address: 127.0.0.1
-                port:    8082
+    - name: testservice1
+      path: /testing/
+      routes:
+          - address: 127.0.0.1
+            port:    8081
+          - address: 127.0.0.1
+            port:    8082
+    - name: testservice2
+      path: /testing2/
+      routes:
+          - address: 127.0.0.1
+            port:    8083
+          - address: 127.0.0.1
+            port:    8084
