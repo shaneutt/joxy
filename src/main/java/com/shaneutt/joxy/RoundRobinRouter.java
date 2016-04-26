@@ -73,8 +73,7 @@ public class RoundRobinRouter implements Router {
   }
 
   /**
-   * Checks the existence of a an address in the routing table
-   *
+   * Checks the existence of a an address in the routing table.
    *
    * @param address InetSocketAddress that the host is listening on.
    */
