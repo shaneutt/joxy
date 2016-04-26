@@ -1,7 +1,7 @@
 package com.shaneutt.joxy;
 
-import java.util.ArrayList;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 
 /**
  * The joxy Router interface defines a routing mechanism wherein

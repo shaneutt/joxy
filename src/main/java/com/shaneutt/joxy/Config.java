@@ -9,31 +9,29 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 public class Config {
   // server config
   public String  serverAddress;
   public Integer serverPort;
-
-  // config files
-  private Map config = null;
+  public ArrayList<Service> services = new ArrayList<Service>();
 
   // constructor
   public Config(String fileName) throws FileNotFoundException, IOException {
-    // TODO - get these values from config files
     Yaml yaml = new Yaml();
 
     // deal with the configuration file
     InputStream configFile = new FileInputStream(fileName);
-    config = (Map) yaml.load(configFile);
+    Map config = (Map) yaml.load(configFile);
     configFile.close();
 
     // get the server and route configurations
     Map serverConfig = (Map) config.get("server");
-    ArrayList routeConfig = (ArrayList) config.get("routes");
+    ArrayList<Map> routeConfig = (ArrayList<Map>) config.get("routes");
 
     // store the server configuration and set defaults where needed
     serverAddress = (String) serverConfig.get("address");
@@ -44,15 +42,42 @@ public class Config {
     if (serverPort == null)
       serverPort = 8080;
 
-    // TODO - set the routes up
+    // build out all the services and their routes
+    for (Map serviceMap: routeConfig) {
+      // build the new service
+      String serviceName = (String) serviceMap.get("name");
+      String servicePath = (String) serviceMap.get("path");
+      Service newService = new Service(serviceName, servicePath, null);
+
+      // build the routes
+      ArrayList<Map> routeList = (ArrayList<Map>) serviceMap.get("routes");
+      for (Map routeMap: routeList) {
+        String  routeAddress = (String)  routeMap.get("address");
+        Integer routePort    = (Integer) routeMap.get("port");
+        Route   newRoute     = new Route(routeAddress, routePort);
+        newService.addRoute(newRoute);
+      }
+
+      // add the service and its route to the services
+      services.add(newService);
+    }
   }
 
-  public static void routerSetup(HttpServer server) {
-    // TODO - take multiple routes via configuration and handle separately
-    server.createContext("/test", new MyHandler());
+  public void routerSetup(HttpServer server) {
+    for (Service service: services) {
+      String           path   = service.path;
+      ArrayList<Route> routes = service.routes;
+      server.createContext(path, new MyHandler(routes));
+    }
   }
 
   static class MyHandler implements HttpHandler {
+    private ArrayList<Route> routes;
+
+    public MyHandler(ArrayList<Route> newRoutes) {
+      routes = newRoutes;
+    }
+
     @Override
     public void handle(HttpExchange t) throws IOException {
       // TODO - get rid of simple default and add routing layer here
@@ -61,6 +86,34 @@ public class Config {
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
       os.close();
+    }
+  }
+
+  public class Route {
+    public String  address;
+    public Integer port;
+
+    public Route(String routeAddress, Integer routePort) {
+      address = routeAddress;
+      port    = routePort;
+    }
+  }
+
+  public class Service {
+    public String name;
+    public String path;
+    public ArrayList<Route> routes;
+
+    public Service(String serviceName, String servicePath, ArrayList<Route> serviceRoutes) {
+      name   = serviceName;
+      path   = servicePath;
+      routes = serviceRoutes;
+      if (routes == null)
+        routes = new ArrayList<Route>();
+    }
+
+    public void addRoute(Route route) {
+      routes.add(route);
     }
   }
 }
