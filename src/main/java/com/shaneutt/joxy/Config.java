@@ -81,7 +81,7 @@ public class Config {
     @Override
     public void handle(HttpExchange t) throws IOException {
       // TODO - get rid of simple default and add routing layer here
-      String response = "{\"success\":\"true\"}";
+      String response = routes.toString();
       t.sendResponseHeaders(200, response.length());
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
